@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DevicesTypesController;
+use App\Http\Controllers\DevicesController;
 use App\Http\Controllers\ServicesController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,3 +38,12 @@ Route::post('/services/create', [ServicesController::class, 'store'])->name('ser
 Route::get('/services/update/{id}', [ServicesController::class, 'update'])->name('services.update');
 Route::put('/services/update/{id}', [ServicesController::class, 'update_store'])->name('services.update');
 Route::delete('/services/service/{id}', [ServicesController::class, 'destroy'])->name('services.delete');
+
+// Devices url
+Route::get('/devices', [DevicesController::class, 'devices'])->name('devices.list');
+Route::get('/devices/device/{number}', [DevicesController::class, 'device'])->name('devices.one');
+Route::get('/devices/create', [DevicesController::class, 'create'])->name('devices.create');
+Route::post('/devices/create', [DevicesController::class, 'store'])->name('devices.create');
+Route::get('/devices/update/{number}', [DevicesController::class, 'update'])->name('devices.update');
+Route::put('/devices/update/{number}', [DevicesController::class, 'update_store'])->name('devices.update');
+Route::delete('/devices/device/{number}', [DevicesController::class, 'destroy'])->name('devices.delete');

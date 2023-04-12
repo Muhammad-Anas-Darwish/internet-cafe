@@ -45,16 +45,12 @@ class DevicesTypesController extends Controller
             'price' => 'required'
         ]);
 
-        if ($validated) {
-            DB::table('devices_types')->insert([
-                'name' => $request['name'],
-                'price' => $request['price']
-            ]);
-            session()->flash('status', 'Device type save successful!');
-        }
-        else {
-            session()->flash('status', 'Device Type Data not valid!');
-        }
+        DB::table('devices_types')->insert([
+            'name' => $request['name'],
+            'price' => $request['price']
+        ]);
+        session()->flash('status', 'Device type save successful!');
+
         return redirect(route('devices_types.list'));
     }
 
@@ -77,18 +73,12 @@ class DevicesTypesController extends Controller
             'price' => 'required'
         ]);
 
-        if ($validated) {
-            $type = DB::table('devices_types')->where('id', $id)->update([
-                'name' => $request['name'],
-                'price' => $request['price']
-            ]);
-            if ($type) {
-                session()->flash('status', 'Device type save successful!');
-            }
-        }
-        else {
-            session()->flash('status', 'Device Type Data not valid!');
-            return redirect(route('devices_types.update'));
+        $type = DB::table('devices_types')->where('id', $id)->update([
+            'name' => $request['name'],
+            'price' => $request['price']
+        ]);
+        if ($type) {
+            session()->flash('status', 'Device type save successful!');
         }
 
         return redirect(route('devices_types.one', $id));

@@ -45,16 +45,12 @@ class ServicesController extends Controller
             'price' => 'required'
         ]);
 
-        if ($validated) {
-            DB::table('services')->insert([
-                'name' => $request['name'],
-                'price' => $request['price']
-            ]);
-            session()->flash('status', 'Service save successful!');
-        }
-        else {
-            session()->flash('status', 'Service not valid!');
-        }
+        DB::table('services')->insert([
+            'name' => $request['name'],
+            'price' => $request['price']
+        ]);
+        session()->flash('status', 'Service save successful!');
+
         return redirect(route('services.list'));
     }
 
@@ -77,18 +73,12 @@ class ServicesController extends Controller
             'price' => 'required'
         ]);
 
-        if ($validated) {
-            $type = DB::table('services')->where('id', $id)->update([
-                'name' => $request['name'],
-                'price' => $request['price']
-            ]);
-            if ($type) {
-                session()->flash('status', 'Service save successful!');
-            }
-        }
-        else {
-            session()->flash('status', 'Service Data not valid!');
-            return redirect(route('services.update'));
+        $type = DB::table('services')->where('id', $id)->update([
+            'name' => $request['name'],
+            'price' => $request['price']
+        ]);
+        if ($type) {
+            session()->flash('status', 'Service save successful!');
         }
 
         return redirect(route('services.one', $id));
