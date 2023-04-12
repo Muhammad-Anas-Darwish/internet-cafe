@@ -3,6 +3,7 @@
 use App\Http\Controllers\DevicesTypesController;
 use App\Http\Controllers\DevicesController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\TaxesController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -47,3 +48,12 @@ Route::post('/devices/create', [DevicesController::class, 'store'])->name('devic
 Route::get('/devices/update/{number}', [DevicesController::class, 'update'])->name('devices.update');
 Route::put('/devices/update/{number}', [DevicesController::class, 'update_store'])->name('devices.update');
 Route::delete('/devices/device/{number}', [DevicesController::class, 'destroy'])->name('devices.delete');
+
+// Taxes url
+Route::get('/taxes', [TaxesController::class, 'taxes'])->name('taxes.list');
+Route::get('/taxes/taxe/{id}', [TaxesController::class, 'taxe'])->name('taxes.one');
+Route::get('/taxes/create', [TaxesController::class, 'create'])->name('taxes.create');
+Route::post('/taxes/create', [TaxesController::class, 'store'])->name('taxes.create');
+Route::get('/taxes/update/{id}', [TaxesController::class, 'update'])->name('taxes.update');
+Route::put('/taxes/update/{id}', [TaxesController::class, 'update_store'])->name('taxes.update');
+Route::delete('/taxes/taxe/{id}', [TaxesController::class, 'destroy'])->name('taxes.delete');
