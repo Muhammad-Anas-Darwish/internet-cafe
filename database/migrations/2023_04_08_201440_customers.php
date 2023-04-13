@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('device_id');
             $table->foreign('device_id')->references('number')->on('devices');
-            $table->time('from_time');
-            $table->time('to_time');
+            $table->timestamp('from_time')->useCurrent();
+            $table->time('reserved time');
             $table->boolean('is_open_time');
         });
     }
