@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sold_taxes', function (Blueprint $table) {
-            $table->foreignId('customer_id')->references('id')->on('customers');
-            $table->foreignId('taxe_id')->references('id')->on('taxes');
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->foreign('customer_id')->references('id')->on('customers')->nullOnDelete();
+            $table->unsignedBigInteger('taxe_id')->nullable();
+            $table->foreign('taxe_id')->references('id')->on('taxes')->nullOnDelete();
         });
     }
 

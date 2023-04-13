@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('sold_services', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id');
-            $table->foreign('customer_id')->references('id')->on('customers');
-            $table->unsignedBigInteger('service_id');
-            $table->foreign('service_id')->references('id')->on('services');
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->foreign('customer_id')->references('id')->on('customers')->nullOnDelete();
+            $table->unsignedBigInteger('service_id')->nullable();
+            $table->foreign('service_id')->references('id')->on('services')->nullOnDelete();
             $table->integer('number');
         });
     }
