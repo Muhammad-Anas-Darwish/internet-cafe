@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->integer('device_id');
+            $table->integer('device_id')->unique();
             $table->foreign('device_id')->references('number')->on('devices');
             $table->timestamp('from_time')->useCurrent();
-            $table->time('reserved time');
-            $table->boolean('is_open_time');
+            $table->time('reserved_time')->default("1:00:00");
+            $table->boolean('is_open_time')->default(0);
         });
     }
 

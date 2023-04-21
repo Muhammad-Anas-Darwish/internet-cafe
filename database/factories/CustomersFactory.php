@@ -19,8 +19,8 @@ class CustomersFactory extends Factory
     {
         $devices = Devices::pluck('number')->toArray();
         return [
-            'device_id' =>  $this->faker->randomElement($devices),
-            'reserved time' => $this->faker->time(),
+            'device_id' =>  $this->faker->unique()->randomElement($devices),
+            'reserved_time' => $this->faker->time(),
             'is_open_time' => $this->faker->boolean(),
         ];
     }

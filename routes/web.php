@@ -1,10 +1,14 @@
 <?php
 
-use App\Http\Controllers\DevicesTypesController;
-use App\Http\Controllers\DevicesController;
-use App\Http\Controllers\ServicesController;
-use App\Http\Controllers\TaxesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaxesController;
+use App\Http\Controllers\DevicesController;
+use App\Http\Controllers\BookingsController;
+use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\DevicesTypesController;
+use App\Http\Controllers\SoldServicesController;
+use App\Http\Controllers\SoldTaxesController;
 
 
 /*
@@ -18,9 +22,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // return view('welcome');
-});
+// Route::get('/', function () {
+//     $customers = new Customers;
+//     $customers = $customers->getAllCustomersSortedByRemainingTime();
+// });
 
 // Devices Types url
 Route::get('/devices_types', [DevicesTypesController::class, 'devices_types'])->name('devices_types.list');
@@ -57,3 +62,23 @@ Route::post('/taxes/create', [TaxesController::class, 'store'])->name('taxes.cre
 Route::get('/taxes/update/{id}', [TaxesController::class, 'update'])->name('taxes.update');
 Route::put('/taxes/update/{id}', [TaxesController::class, 'update_store'])->name('taxes.update');
 Route::delete('/taxes/taxe/{id}', [TaxesController::class, 'destroy'])->name('taxes.delete');
+
+// Bookings urls
+Route::get('/', [BookingsController::class, 'main'])->name('bookings.main');
+
+// Route::get('/main', function () {
+//     return Customers::find(6);
+// });
+
+// Customers urls
+Route::post('/customers/create', [CustomersController::class, 'store'])->name('customers.create');
+Route::put('/customers/update/{id}', [CustomersController::class, 'update_store'])->name('customers.update');
+Route::delete('/customers/delete/{id}', [CustomersController::class, 'destroy'])->name('customers.delete');
+
+// Sold services urls
+Route::post('sold/services/create', [SoldServicesController::class, 'store'])->name('sold.services.create');
+Route::delete('sold/services/delete/{id}', [SoldServicesController::class, 'destroy'])->name('sold.services.delete');
+
+// Sold taxes urls
+Route::post('sold/taxes/create', [SoldTaxesController::class, 'store'])->name('sold.taxes.create');
+Route::delete('sold/taxes/delete/{id}', [SoldTaxesController::class, 'destroy'])->name('sold.taxes.delete');
