@@ -7,6 +7,8 @@ use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\DevicesTypesController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SoldServicesController;
 use App\Http\Controllers\SoldTaxesController;
 
@@ -66,19 +68,23 @@ Route::delete('/taxes/taxe/{id}', [TaxesController::class, 'destroy'])->name('ta
 // Bookings urls
 Route::get('/', [BookingsController::class, 'main'])->name('bookings.main');
 
-// Route::get('/main', function () {
-//     return Customers::find(6);
-// });
-
 // Customers urls
 Route::post('/customers/create', [CustomersController::class, 'store'])->name('customers.create');
 Route::put('/customers/update/{id}', [CustomersController::class, 'update_store'])->name('customers.update');
 Route::delete('/customers/delete/{id}', [CustomersController::class, 'destroy'])->name('customers.delete');
 
 // Sold services urls
-Route::post('sold/services/create', [SoldServicesController::class, 'store'])->name('sold.services.create');
-Route::delete('sold/services/delete/{id}', [SoldServicesController::class, 'destroy'])->name('sold.services.delete');
+Route::post('/sold/services/create', [SoldServicesController::class, 'store'])->name('sold.services.create');
+Route::delete('/sold/services/delete/{id}', [SoldServicesController::class, 'destroy'])->name('sold.services.delete');
 
 // Sold taxes urls
-Route::post('sold/taxes/create', [SoldTaxesController::class, 'store'])->name('sold.taxes.create');
-Route::delete('sold/taxes/delete/{id}', [SoldTaxesController::class, 'destroy'])->name('sold.taxes.delete');
+Route::post('/sold/taxes/create', [SoldTaxesController::class, 'store'])->name('sold.taxes.create');
+Route::delete('/sold/taxes/delete/{id}', [SoldTaxesController::class, 'destroy'])->name('sold.taxes.delete');
+
+// User Authentication
+Route::get('/user/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/user/login', [LoginController::class, 'authenticate'])->name('login')->middleware('guest');
+
+// Create User
+Route::get('/user/register', [RegisterController::class, 'create'])->name('user.create');
+Route::post('/user/register', [RegisterController::class, 'store'])->name('user.create');
