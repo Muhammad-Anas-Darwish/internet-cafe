@@ -1,23 +1,29 @@
 <x-layout>
-    <h3>Update Device Type</h3>
+    <x-slot:body_style>background-image: url({{ url('images', 'bg-1.jpg') }});</x-slot:body_style>
 
-    <form action="{{ route('devices_types.update', $device_type->id) }}" method="post">
-        @csrf
-        @method('PUT')
-        <div>
-            <label for="name">Name: </label>
-            <input type="text" name="name" value="{{ $device_type->name }}" required>
-            @error('name')
-                <div>{{ $message }}</div>
-            @enderror
+    <div class="form-box center">
+        <div class="box">
+            <h2>Device Type</h2>
+            <form action="{{ route('devices_types.update', $device_type->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <input class="field" placeholder="Title" type="text" name="name" value="{{ $device_type->name }}" required>
+                @error('name')
+                    <div class="error"> - {{ $message }}</div>
+                @enderror
+
+                <input class="field" placeholder="Price" type="number" name="price" value="{{ $device_type->price }}" required>
+                @error('price')
+                    <div class="error"> - {{ $message }}</div>
+                @enderror
+                
+                <input class="field" placeholder="Image" type="file" name="image" @error('image') is-invalid @enderror>
+                @error('image')
+                    <div class="error"> - {{ $message }}</div>
+                @enderror
+                <input type="submit" value="Create">
+            </form>
         </div>
-        <div>
-            <label for="price">Price: </label>
-            <input type="number" name="price" value="{{ $device_type->price }}" required>
-            @error('price')
-                <div>{{ $message }}</div>
-            @enderror
-        </div>
-        <input type="submit" value="Update">
-    </form>
+    </div>
 </x-layout>

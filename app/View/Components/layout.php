@@ -11,7 +11,7 @@ class layout extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public ?string $title = Null)
+    public function __construct(public ?string $title = Null, public ?string $body_style = Null)
     {
         //
     }

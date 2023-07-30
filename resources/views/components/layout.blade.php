@@ -5,26 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Internet Cafe'}}</title>
+    {{-- CSS Code --}}
+    <link rel="stylesheet" href="{{url('css', 'normalize.css')}}">
+    <link rel="stylesheet" href="{{url('css', 'master.css')}}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{url('css', 'all.min.css')}}">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <h1>Header</h1>
-    @if (session()->has('status'))
-        <div>
-            {{ session('status') }}
-        </div>
-        @endif
-    <div>
-        {{-- @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif --}}
-    </div>
+
+{{-- <body @if (!is_null($body_style)) style="{{$body_style}}" @endif> --}}
+<body style="{{$body_style ?? ''}}">
+    @include('components/header')
+
+    @include('components/sessions')
+
     {{ $slot }}
-    <h1>Footer</h1>
+
+    @include('components/footer')
+
+    <script src="js/script.js"></script>
 </body>
 </html>

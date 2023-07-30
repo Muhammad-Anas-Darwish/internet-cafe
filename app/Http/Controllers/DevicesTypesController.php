@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DevicesTypes;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class DevicesTypesController extends Controller
 {
     // show all devices_types
-    public function devices_types(): View
+    public function index(): View
     {
-        $types = DB::table('devices_types')->get();
+        $types = DevicesTypes::all();
 
         $context = [
             'devices_types' => $types,
@@ -21,9 +21,9 @@ class DevicesTypesController extends Controller
     }
 
     // show one devices_types
-    public function device_type($id): View
+    public function show($id): View
     {
-        $type = DB::table('devices_types')->where('id', $id)->first();
+        $type = DevicesTypes::find($id);
 
         $context = [
             'device_type' => $type,
@@ -42,22 +42,29 @@ class DevicesTypesController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|max:255',
-            'price' => 'required'
+            'price' => 'required',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
         ]);
 
-        DB::table('devices_types')->insert([
+        $imageName = time().'.'.$request->image->extension();
+
+        // Public Folder
+        $request->image->move(public_path('images'), $imageName);
+
+        DevicesTypes::create([
             'name' => $request['name'],
-            'price' => $request['price']
+            'price' => $request['price'],
+            'image' => $imageName,
         ]);
         session()->flash('status', 'Device type save successful!');
 
         return redirect(route('devices_types.list'));
     }
 
-    // update devices_types
-    public function update($id)
+    // edit devices_types
+    public function edit($id)
     {
-        $type = DB::table('devices_types')->where('id', $id)->first();
+        $type = DevicesTypes::find($id);
 
         $context = [
             'device_type' => $type,
@@ -65,15 +72,15 @@ class DevicesTypesController extends Controller
         return view('devices_types.update', $context);
     }
 
-    // update store devices_types
-    public function update_store(Request $request, $id)
+    // update devices_types
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'name' => 'required|max:255',
             'price' => 'required'
         ]);
 
-        $type = DB::table('devices_types')->where('id', $id)->update([
+        $type = DevicesTypes::find($id)->update([
             'name' => $request['name'],
             'price' => $request['price']
         ]);
@@ -87,7 +94,8 @@ class DevicesTypesController extends Controller
     // delete devices_types
     public function destroy($id)
     {
-        $device_type = DB::table('devices_types')->where('id', $id);
+        $device_type = DevicesTypes::find($id);
+
         if ($device_type->exists()) {
             $name = $device_type->first()->name;
             $device_type->delete();

@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Taxes;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class TaxesController extends Controller
 {
     // show all taxes
-    public function taxes(): View
+    public function index(): View
     {
-        $taxes = DB::table('taxes')->get();
+        $taxes = Taxes::all();
 
         $context = [
             'taxes' => $taxes,
@@ -21,9 +21,9 @@ class TaxesController extends Controller
     }
 
     // show one taxe
-    public function taxe($id): View
+    public function show($id): View
     {
-        $taxe = DB::table('taxes')->where('id', $id)->first();
+        $taxe = Taxes::find($id);
 
         $context = [
             'taxe' => $taxe,
@@ -45,7 +45,7 @@ class TaxesController extends Controller
             'price' => 'required'
         ]);
 
-        DB::table('taxes')->insert([
+        Taxes::create([
             'name' => $request['name'],
             'price' => $request['price']
         ]);
@@ -54,10 +54,10 @@ class TaxesController extends Controller
         return redirect(route('taxes.list'));
     }
 
-    // update taxes
-    public function update($id): View
+    // edit taxes
+    public function edit($id): View
     {
-        $taxe = DB::table('taxes')->where('id', $id)->first();
+        $taxe = Taxes::find($id);
 
         $context = [
             'taxe' => $taxe,
@@ -65,15 +65,15 @@ class TaxesController extends Controller
         return view('taxes.update', $context);
     }
 
-    // update store taxes
-    public function update_store(Request $request, $id): RedirectResponse
+    // update taxes
+    public function update(Request $request, $id): RedirectResponse
     {
         $validated = $request->validate([
             'name' => 'required|max:255',
             'price' => 'required'
         ]);
 
-        $taxe = DB::table('taxes')->where('id', $id)->update([
+        $taxe = Taxes::find($id)->update([
             'name' => $request['name'],
             'price' => $request['price']
         ]);
@@ -87,7 +87,7 @@ class TaxesController extends Controller
     // delete taxes
     public function destroy($id): RedirectResponse
     {
-        $taxe = DB::table('taxes')->where('id', $id);
+        $taxe = Taxes::find($id);
         if ($taxe->exists()) {
             $name = $taxe->first()->name;
             $taxe->delete();

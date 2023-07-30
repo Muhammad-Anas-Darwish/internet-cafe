@@ -7,15 +7,14 @@ use App\Models\DevicesTypes;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class DevicesController extends Controller
 {
     // show all devices
-    public function devices(): View
+    public function index(): View
     {
-        $devices = DB::table('devices')->get();
+        $devices = Devices::all();
 
         $context = [
             'devices' => $devices,
@@ -24,9 +23,9 @@ class DevicesController extends Controller
     }
 
     // show one devices
-    public function device($number): View
+    public function show($number): View
     {
-        $device = DB::table('devices')->where('number', $number)->first();
+        $device = Devices::where('number', $number)->first();
 
         $context = [
             'device' => $device,
@@ -37,7 +36,7 @@ class DevicesController extends Controller
     // create devices
     public function create(): View
     {
-        $types = DB::table('devices_types')->select('id','name')->get();
+        $types = DevicesTypes::all('id','name');
 
         return view('devices.create')->with('devices_types', $types);
     }
@@ -50,21 +49,22 @@ class DevicesController extends Controller
             'number' => 'required|unique:devices'
         ]);
 
-        DB::table('devices')->insert([
+        Devices::create([
             'device_type_id' => $request['device_type_id'],
             'number' => $request['number'],
             'is_active' => $request['is_active'] ? 1 : 0
         ]);
+
         session()->flash('status', 'Device ' . $request['number'] . ' created successful!');
 
         return redirect(route('devices.list'));
     }
 
-    // update devices
-    public function update($number): View
+    // edit devices
+    public function edit($number): View
     {
-        $types = DB::table('devices_types')->select('id','name')->get();
-        $device = DB::table('devices')->where('number', $number)->first();
+        $types = DevicesTypes::all('id','name');
+        $device = Devices::where('number', $number)->first();
 
         $context = [
             'device' => $device,
@@ -73,14 +73,14 @@ class DevicesController extends Controller
         return view('devices.update', $context);
     }
 
-    // update store devices
-    public function update_store(Request $request, $number): RedirectResponse
+    // update devices
+    public function update(Request $request, $number): RedirectResponse
     {
         $validated = $request->validate([
             'device_type_id' => 'required',
         ]);
 
-        $device = DB::table('devices')->where('number', $number)->update([
+        $device = Devices::where('number', $number)->update([
             'device_type_id' => $request['device_type_id'],
             'is_active' => $request['is_active'] ? 1 : 0
         ]);
@@ -95,7 +95,7 @@ class DevicesController extends Controller
     // delete devices
     public function destroy($number): RedirectResponse
     {
-        $device = DB::table('devices')->where('number', $number);
+        $device = Devices::where('number', $number);
         if ($device->exists()) {
             $device->delete();
             session()->flash('status', 'Device ' . $number . ' Deleted Successful!');

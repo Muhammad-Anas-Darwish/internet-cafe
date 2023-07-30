@@ -1,41 +1,35 @@
 <x-layout>
-    <h3>Create Device</h3>
+    <x-slot:body_style>background-image: url({{ url('images', 'bg-1.jpg') }});</x-slot:body_style>
 
-    <form action="{{ route('devices.create') }}" method="post">
-        @csrf
-        <div>
-            <label for="device_type_id">Device Type Id: </label>
-            <select name="device_type_id" required>
-                <option value="">------------------</option>
-                @foreach ($devices_types as $device_type)
-                    <option value="{{ $device_type->id }}" @if (old('device_type_id') == $device_type->id) selected @endif>{{ $device_type->name }}</option>
-                @endforeach
-            </select>
-            @error('device_type_id')
-                <div>{{ $message }}</div>
-            @enderror
+    <div class="form-box center">
+        <div class="box">
+            <h2>Device</h2>
+            <form action="{{ route('devices.create') }}" method="POST">
+                @csrf
+
+                <select class="field" name="device_type_id" required>
+                    <option value="">------</option>
+                    @foreach ($devices_types as $device_type)
+                        <option value="{{ $device_type->id }}" @if (old('device_type_id') == $device_type->id) selected @endif>{{ $device_type->name }}</option>
+                    @endforeach
+                </select>
+                @error('device_type_id')
+                    <div class="error"> - {{ $message }}</div>
+                @enderror
+
+                <input class="field" placeholder="Number" type="number" name="number" value="{{ old('number') }}" required>
+                @error('number')
+                    <div class="error"> - {{ $message }}</div>
+                @enderror
+
+                <label for="is_active"><p>Is Active:</p> </label>
+                <input id="is_active" class="field check-box" type="checkbox" name="is_active" @if(old('is_active')) checked @endif>
+                @error('is_active')
+                    <div class="error"> - {{ $message }}</div>
+                @enderror
+
+                <input type="submit" value="Create">
+            </form>
         </div>
-        {{-- <div>
-            <label for="device_type_id">Device Type Id: </label>
-            <input type="text" name="device_type_id" value="{{ old('device_type_id') }}" required>
-            @error('device_type_id')
-                <div>{{ $message }}</div>
-            @enderror
-        </div> --}}
-        <div>
-            <label for="number">Number: </label>
-            <input type="number" name="number" value="{{ old('number') }}" required>
-            @error('number')
-                <div>{{ $message }}</div>
-            @enderror
-        </div>
-        <div>
-            <label for="is_active">Is Active: </label>
-            <input type="checkbox" name="is_active" @if(old('is_active')) checked @endif>
-            @error('is_active')
-                <div>{{ $message }}</div>
-            @enderror
-        </div>
-        <input type="submit" value="Save">
-    </form>
+    </div>
 </x-layout>

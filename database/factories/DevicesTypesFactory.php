@@ -19,6 +19,7 @@ class DevicesTypesFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'price' => $this->faker->numerify('#000'),
+            'image' => $this->faker->image(),
         ];
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\SoldServices;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 
 
@@ -31,7 +30,7 @@ class SoldServicesController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        $sold_service = SoldServices::where('id', $id)->first();
+        $sold_service = SoldServices::find($id);
         $name = $sold_service->service->name;
 
         if ($sold_service->exists()) {

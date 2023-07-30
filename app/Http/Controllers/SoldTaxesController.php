@@ -27,7 +27,7 @@ class SoldTaxesController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        $sold_taxe = SoldTaxes::where('id', $id)->first();
+        $sold_taxe = SoldTaxes::find($id);
 
         if ($sold_taxe->exists()) {
             $name = $sold_taxe->taxe->name;

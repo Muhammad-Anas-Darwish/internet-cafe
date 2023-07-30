@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/master.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Start Header -->
+    <div class="header" id="header">
+        <div class="container">
+            <a href="#" class="logo">Anas Darwish</a>
+            <ul class="main-nav">
+                <li><a href="#articles">Article</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#features">Features</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- End Header -->
+
+    <!-- Start Session -->
+    <div class="sessions">
+        <div class="session">
+            <p>Device 5 is ended.</p>
+            <button class="exit"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+    <!-- End Session -->
+
+    <!-- Start Main Page -->
+    <div class="full-container">
+        <div class="sidebar">
+            <div color="bg-trans-red" id="device-1" class="device">
+                <h3 class="title">PS4 <span class="bg-red">3</span></h3>
+                <h3 status="open-time" class="time">3:10</h3>
+            </div>
+            <div color="bg-trans-blue" id="device-2" class="device">
+                <h3 class="title">PS4 <span class="bg-blue">2</span></h3>
+                <h3 status="end-time" class="time">4:45</h3>
+            </div>
+            <div color="bg-trans-orange" id="device-3" class="device">
+                <h3 class="title">PS4 <span class="bg-orange">1</span></h3>
+                <h3 status="specific-time" class="time">12:13</h3>
+            </div>
+            <div color="bg-trans-green" id="device-4" class="device">
+                <h3 class="title">PS4 <span class="bg-green">4</span></h3>
+                <h3 class="time">10:58</h3>
+            </div>
+        </div>
+        <div class="container content-container">
+            <div color="bg-trans-red" id="device-1" class="device"><span class="bg-blue">5</span>
+                <img src="images/ps-4.png">
+            </div>
+            <div color="bg-trans-blue" id="device-2" class="device"><span class="bg-green">5</span>
+                <img src="images/ps-4.png">
+            </div>
+            <div color="bg-trans-green" id="device-3" class="device"><span class="bg-blue">5</span>
+                <img src="images/ps-4.png">
+            </div>
+            <div color="bg-trans-black" id="device-4" class="device"><span class="bg-blue">5</span>
+                <img src="images/ps-4.png">
+            </div>
+            <div color="bg-trans-red" id="device-5" class="device"><span class="bg-orange">5</span>
+                <img src="images/ps-4.png">
+            </div>
+            <div color="bg-trans-red" id="device-6" class="device"><span class="bg-blue">5</span>
+                <img src="images/ps-4.png">
+            </div>
+            <div color="bg-trans-red" id="device-7" class="device"><span class="bg-red">5</span>
+                <img src="images/ps-4.png">
+            </div>
+            <div color="bg-trans-red" id="device-8" class="device"><span class="bg-blue">5</span>
+                <img src="images/ps-4.png">
+            </div>
+            <div color="bg-trans-red" id="device-9" class="device"><span class="bg-red">5</span>
+                <img src="images/ps-4.png">
+            </div>
+            <div color="bg-trans-red" id="device-10" class="device"><span class="bg-blue">5</span>
+                <img src="images/ps-4.png">
+            </div>
+            <div color="bg-trans-red" id="device-11" class="device"><span class="bg-green">5</span>
+                <img src="images/ps-4.png">
+            </div>
+            <div color="bg-trans-red" id="device-12" class="device"><span class="bg-blue">5</span>
+                <img src="images/ps-4.png">
+            </div>
+        </div>
+    </div>
+    <!-- End Main Page -->
+
+    <!-- Start Popups -->
+    <div class="popup-background bg-trans-red hidden">
+        <div id="popup-device-1" class="popup three-sections end-time hidden">
+            <button class="exit"><i class="fas fa-times"></i></button>
+            <div class="up">
+                <div class="left">
+                    <h4>Time: 1:00</h4>
+                    <h4>Hour price: $500</h4>
+                    <h4>Total time price: $500</h4>
+                </div>
+                <div class="right">
+                    <h4>Services: $100</h4>
+                    <h4>Taxes: $50</h4>
+                    <h4 class="text-red">Total: $650
+                        <form class="block-form" action="" method="post">
+                            <input type="submit" value="Delete" class="btn bg-red">
+                        </form>
+                    </h4>
+                </div>
+            </div>
+            <div class="down">
+                <div class="left">
+                    <h3 class="text-blue">Services</h3>
+                    <h4>choco 5 * $10 = $500</h4>
+                    <h4>X4 3 * $1 = $3</h4>
+                    <h4>Romba 5 * $5 = $25</h4>
+                    <h4 class="text-orange">Total $528</h4>
+                </div>
+                <div class="right">
+                    <h3 class="text-blue">Taxes</h3>
+                    <h4>Keyboard $500</h4>
+                    <h4>Mouse $3</h4>
+                    <h4 class="text-orange">Total $503</h4>
+                </div>
+            </div>
+        </div>
+
+        <div id="popup-device-2" class="popup three-sections open-time hidden">
+            <button class="exit"><i class="fas fa-times"></i></button>
+            <div class="up">
+                <div class="left">
+                    <h4>Time: 1:00</h4>
+                    <h4>Hour price: $500</h4>
+                    <h4>Total time price: $500</h4>
+                </div>
+                <div class="right">
+                    <h4>Services: $100</h4>
+                    <h4>Taxes: $50</h4>
+                    <h4 class="text-red">Total: $650
+                        <form class="block-form" action="" method="post">
+                            <input type="submit" value="Stop" class="btn stop bg-orange">
+                        </form>
+                        <form class="block-form" action="" method="post">
+                            <input type="submit" value="Delete" class="btn bg-red">
+                        </form>
+                    </h4>
+                </div>
+            </div>
+            <div class="down">
+                <div class="left">
+                    <h3 class="text-blue">Services</h3>
+                    <form action="" method="get" class="one-line-form">
+                        <select class="simple-input" name="" required>
+                            <option value="">--------</option>
+                            <option value="1">Choco</option>
+                            <option value="2">X4</option>
+                            <option value="3">Romba</option>
+                        </select>
+                        <input class="simple-input" type="number" value="1" name="" required>
+                        <input type="submit" value=">">
+                    </form>
+                    <h4>choco 5 * $10 = $500</h4>
+                    <h4>X4 3 * $1 = $3</h4>
+                    <h4>Romba 5 * $5 = $25</h4>
+                    <h4 class="text-orange">Total $528</h4>
+                </div>
+                <div class="right">
+                    <h3 class="text-blue">Taxes</h3>
+                    <form action="" method="get" class="one-line-form">
+                        <select class="simple-input" name="" required>
+                            <option value="">--------</option>
+                            <option value="1">Mouse</option>
+                            <option value="2">Keyboard</option>
+                            <option value="3">Headphone</option>
+                        </select>
+                        <input type="submit" value=">">
+                    </form>
+                    <h4>Keyboard $500</h4>
+                    <h4>Mouse $3</h4>
+                    <h4 class="text-orange">Total $503</h4>
+                </div>
+            </div>
+        </div>
+
+        <div id="popup-device-3" class="popup three-sections specific-time hidden">
+            <button class="exit"><i class="fas fa-times"></i></button>
+            <div class="up">
+                <div class="left">
+                    <h4>Time: 1:00</h4>
+                    <h4>Hour price: $500</h4>
+                    <h4>Total time price: $500</h4>
+                    <h4 class="text-blue">Time Remaining: 0:15</h4>
+                </div>
+                <div class="right">
+                    <h4>Services: $100</h4>
+                    <h4>Taxes: $50</h4>
+                    <h4>&ThinSpace;</h4>
+                    <h4 class="text-red">Total: $650</h4>
+                </div>
+            </div>
+            <div class="down">
+                <div class="left">
+                    <h3 class="text-blue">Services</h3>
+                    <form action="" method="get" class="one-line-form">
+                        <select class="simple-input" name="" required>
+                            <option value="">--------</option>
+                            <option value="1">Choco</option>
+                            <option value="2">X4</option>
+                            <option value="3">Romba</option>
+                        </select>
+                        <input class="simple-input" type="number" value="1" name="" required>
+                        <input type="submit" value=">">
+                    </form>
+                    <h4>choco 5 * $10 = $500</h4>
+                    <h4>X4 3 * $1 = $3</h4>
+                    <h4>Romba 5 * $5 = $25</h4>
+                    <h4 class="text-orange">Total $528</h4>
+                </div>
+                <div class="right">
+                    <h3 class="text-blue">Taxes</h3>
+                    <form action="" method="get" class="one-line-form">
+                        <select class="simple-input" name="" required>
+                            <option value="">--------</option>
+                            <option value="1">Mouse</option>
+                            <option value="2">Keyboard</option>
+                            <option value="3">Headphone</option>
+                        </select>
+                        <input type="submit" value=">">
+                    </form>
+                    <h4>Keyboard $500</h4>
+                    <h4>Mouse $3</h4>
+                    <h4 class="text-orange">Total $503</h4>
+                </div>
+            </div>
+        </div>
+
+        <div id="popup-device-4" class="popup three-sections specific-time hidden">
+            <button class="exit"><i class="fas fa-times"></i></button>
+            <div class="up">
+                <div>
+                    <h3>PS4 device 4</h3>
+                    <form action="" method="get" class="one-line-form">
+                        <label for="time">Time: </label>
+                        <input id="time" class="simple-input" type="text" name="">
+                        <label for="is-open-time">Is open time: </label>
+                        <input id="is-open-time" class="simple-input" type="checkbox" name="">
+                        <input type="submit" value=">">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Popups -->
+
+    <!-- Start Copyright -->
+    <div class="copyright">Made With &lt;3 By Silver</div>
+    <!-- End Copyright -->
+
+    <script src="js/script.js"></script>
+</body>
+</html>

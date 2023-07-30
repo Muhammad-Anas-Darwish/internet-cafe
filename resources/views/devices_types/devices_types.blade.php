@@ -1,7 +1,21 @@
 <x-layout title="Devices Types">
-    <h3>Devices Types</h3>
+    <x-slot:body_style>background-image: url({{ url('images', 'bg-2.jpg') }});backdrop-filter: blur(3px);</x-slot:body_style>
 
-    @foreach ($devices_types as $device_type)
-        <p><a href="{{ route('devices_types.one', $device_type->id) }}">{{ $device_type->name }}</a> - {{ $device_type->price }}</p>
-    @endforeach
+<h1 class="main-title">Devices Types</h1>
+
+    <div class="all-cards">
+        @foreach ($devices_types as $device_type)
+        <div class="box">
+            <a href="{{ route('devices_types.one', $device_type->id) }}">
+                <div class="center img">
+                    <img src="{{ $device_type->image_url }}">
+                </div>
+                <div class="content">
+                    <h2>{{ $device_type->name }}</h2>
+                    <h3>Price: {{ $device_type->price }}$</h3>
+                </div>
+            </a>
+        </div>
+        @endforeach
+    </div>
 </x-layout>

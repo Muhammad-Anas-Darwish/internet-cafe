@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Services;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 
 class ServicesController extends Controller
 {
     // show all services
-    public function services(): View
+    public function index(): View
     {
-        $types = DB::table('services')->get();
+        $services = Services::all();
 
         $context = [
-            'services' => $types,
+            'services' => $services,
         ];
         return view('services.services', $context);
     }
 
     // show one service
-    public function service($id): View
+    public function show($id): View
     {
-        $type = DB::table('services')->where('id', $id)->first();
+        $service = Services::find($id);
 
         $context = [
-            'service' => $type,
+            'service' => $service,
         ];
         return view('services.service', $context);
     }
@@ -45,7 +45,7 @@ class ServicesController extends Controller
             'price' => 'required'
         ]);
 
-        DB::table('services')->insert([
+        Services::create([
             'name' => $request['name'],
             'price' => $request['price']
         ]);
@@ -54,30 +54,30 @@ class ServicesController extends Controller
         return redirect(route('services.list'));
     }
 
-    // update services
-    public function update($id)
+    // edit services
+    public function edit($id)
     {
-        $type = DB::table('services')->where('id', $id)->first();
+        $service = Services::find($id);
 
         $context = [
-            'service' => $type,
+            'service' => $service,
         ];
         return view('services.update', $context);
     }
 
-    // update store services
-    public function update_store(Request $request, $id)
+    // update services
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'name' => 'required|max:255',
             'price' => 'required'
         ]);
 
-        $type = DB::table('services')->where('id', $id)->update([
+        $service = Services::find($id)->update([
             'name' => $request['name'],
             'price' => $request['price']
         ]);
-        if ($type) {
+        if ($service) {
             session()->flash('status', 'Service save successful!');
         }
 
@@ -87,7 +87,7 @@ class ServicesController extends Controller
     // delete services
     public function destroy($id)
     {
-        $service = DB::table('services')->where('id', $id);
+        $service = Services::fin($id);
         if ($service->exists()) {
             $name = $service->first()->name;
             $service->delete();

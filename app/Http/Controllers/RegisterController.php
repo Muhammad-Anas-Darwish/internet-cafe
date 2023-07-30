@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Auth;
 
 
 class RegisterController extends Controller
@@ -41,7 +42,11 @@ class RegisterController extends Controller
             'password' => Hash::make($request['password'])
             // 'password' => $request['password']
         ]);
+
         session()->flash('status', 'User ' . $request['name'] . ' created successful!');
+        
+        Auth::attempt($validated);
+        $request->session()->regenerate();
 
         return redirect(route('bookings.main'));
     }

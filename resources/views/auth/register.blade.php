@@ -1,37 +1,31 @@
 <x-layout>
     <x-slot:title>Create User</x-slot:title>
+    <x-slot:body_style>background-image: url({{url('images', 'bg-1.jpg')}});</x-slot:body_style>
 
-    <h3>Create User</h3>
-
-    <form action="{{ route('user.create') }}" method="POST">
-        @csrf
-
-        <label for="name">Name: </label>
-        <input type="text" name="name" value="{{old('name')}}" required>
-        @error('name')
-            <div>{{ $message }}</div>
-        @enderror
-        <br>
-
-        <label for="email">Email: </label>
-        <input type="email" name="email" value="{{old('email')}}" required>
-        @error('email')
-            <div>{{ $message }}</div>
-        @enderror
-        <br>
-
-        <label for="password">Password: </label>
-        <input type="password" name="password" required>
-        @error('password')
-            <div>{{ $message }}</div>
-        @enderror
-
-        <label for="password_confirmation">Password: </label>
-        <input type="password" name="password_confirmation" required>
-        @error('password_confirmation')
-            <div>{{ $message }}</div>
-        @enderror
-
-        <input type="submit" value="Register">
-    </form>
+    <div class="form-box center">
+        <div class="box">
+            <h2>Register</h2>
+            <form action="{{ route('user.create') }}" method="POST">
+                @csrf
+                <input class="field" placeholder="Name" type="text" name="name">
+                @error('name')
+                    <div>{{ $message }}</div>
+                @enderror
+                <input class="field" placeholder="Email" type="email" name="email">
+                @error('email')
+                    <div>{{ $message }}</div>
+                @enderror
+                <input class="field" placeholder="Password" type="password" name="password">
+                @error('password')
+                    <div>{{ $message }}</div>
+                @enderror
+                <input class="field" placeholder="Password Confirmation" type="password" name="password_confirmation">
+                @error('password_confirmation')
+                    <div>{{ $message }}</div>
+                @enderror
+                <input type="submit" value="Register">
+            </form>
+            <p>I have an account? <a href="{{ route('login') }}">Sign In</a></p>
+        </div>
+    </div>
 </x-layout>

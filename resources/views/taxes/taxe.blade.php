@@ -1,15 +1,20 @@
 <x-layout>
     <x-slot:title>{{ $taxe->name }}</x-slot:title>
+    <x-slot:body_style>background-image: url({{ url('images', 'bg-2.jpg') }});</x-slot:body_style>
 
-    <h3>Taxe</h3>
+    <div class="show-box center">
+        <div class="box">
+            <h2>{{ $taxe->name }}</h2>
+            <h3>Price: {{ $taxe->price }}</h3>
 
-    <p>{{ $taxe->name }}</p>
-    <p>{{ $taxe->price }}</p>
-
-    <a href="{{ route('taxes.update', $taxe->id) }}">Edit</a>
-    <form method="POST">
-        @csrf
-        @method('delete')
-        <input type="submit" value="delete">
-    </form>
+            <div class="down">
+                <a href="{{ route('taxes.update', $taxe->id) }}">Update</a>
+                <form method="POST">
+                    @csrf
+                    @method('delete')
+                    <input type="submit" value="Delete">
+                </form>
+            </div>
+        </div>
+    </div>
 </x-layout>

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Customers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 
 class CustomersController extends Controller
@@ -28,13 +27,12 @@ class CustomersController extends Controller
         return redirect(route('bookings.main'));
     }
 
-    public function update_store(Request $request, $id): RedirectResponse
+    public function update(Request $request, $id): RedirectResponse
     {
-        $customer = DB::table('customers')
-            ->where('id', $id)
-            ->update([
-                'is_open_time' => $request['is_open_time'] ? 1 : 0
-            ]);
+        $customer = Customers::find($id)->update([
+            'is_open_time' => $request['is_open_time'] ? 1 : 0
+        ]);
+
 
         if ($customer) {
             session()->flash('status', 'device updated successful!');
@@ -45,10 +43,10 @@ class CustomersController extends Controller
 
     public function destroy($id)
     {
-        $taxe = DB::table('customers')->where('id', $id);
+        $customer = Customers::find($id);
 
-        if ($taxe->exists()) {
-            $taxe->delete();
+        if ($customer->exists()) {
+            $customer->delete();
             session()->flash('status', 'Customer Deleted Successful!');
         }
 
