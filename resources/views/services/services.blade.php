@@ -4,7 +4,7 @@
 
     {{-- <p><a href="{{ route('services.one', $service->id) }}">{{ $service->name }}</a> - {{ $service->price }}</p> --}}
 
-    <h1 class="main-title">Services</h1>
+    <h1 class="main-title">Services <a href="{{ route('services.create') }}">Create</a></h1>
 
     <div class="all-cards">
         @foreach ($services as $service)

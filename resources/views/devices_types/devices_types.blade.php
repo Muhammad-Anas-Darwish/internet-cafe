@@ -1,7 +1,7 @@
 <x-layout title="Devices Types">
     <x-slot:body_style>background-image: url({{ url('images', 'bg-2.jpg') }});backdrop-filter: blur(3px);</x-slot:body_style>
 
-<h1 class="main-title">Devices Types</h1>
+<h1 class="main-title">Devices Types <a href="{{ route('devices_types.create') }}">Create</a></h1>
 
     <div class="all-cards">
         @foreach ($devices_types as $device_type)

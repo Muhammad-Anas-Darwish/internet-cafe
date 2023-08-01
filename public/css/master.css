@@ -117,14 +117,22 @@ ul {
 }
 /* End Global Rules */
 
-/* Start Title */ 
+/* Start Title */
 .main-title {
     margin-left: 1em;
     margin-bottom: 0;
     color: #000000aa;
     font-weight: bold;
 }
-/* End Title */ 
+
+.main-title a {
+    background-color:#029002b6;
+    padding: 0 20px;
+    border-radius: 10px;
+    color: #000000aa;
+    font-weight: 400;
+}
+/* End Title */
 
 /* Start Header */
 .header {
@@ -619,7 +627,7 @@ ul {
     background-color: transparent;
 }
 
-.form-box .box input, 
+.form-box .box input,
 .form-box .box select {
     border: none;
     border-radius: 2px;
@@ -669,7 +677,7 @@ ul {
     margin-left: 10px;
 }
 
-.form-box .box .check-box, 
+.form-box .box .check-box,
 .form-box .box label p {
     width: fit-content;
 }
