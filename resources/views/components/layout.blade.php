@@ -16,8 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 
-{{-- <body @if (!is_null($body_style)) style="{{$body_style}}" @endif> --}}
-<body style="{{$body_style ?? ''}}">
+<body style="{{ $body_style ?? '' }}">
     @include('components/header')
 
     @include('components/sessions')

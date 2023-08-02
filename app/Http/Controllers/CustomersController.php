@@ -13,7 +13,7 @@ class CustomersController extends Controller
     {
         $validated = $request->validate([
             'device_id' => 'required|exists:devices,number',
-            'reserved_time' => 'required|date_format:H:i',
+            'reserved_time' => ['required', 'regex:/([0-1][0-9]|[0-9]|1[0-9]|2[0-3]):[0-5][0-9]/'],
         ]);
 
         Customers::insert([

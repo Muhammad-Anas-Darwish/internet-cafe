@@ -17,6 +17,7 @@ class Customers extends Model
 
     protected $with = ['device'];
     protected $appends = ['remaining_time', 'services_cost', 'taxes_cost', 'reserved_time_cost', 'total_time', 'total_cost', 'sold_services', 'sold_taxes'];
+    protected $fillable = ['device_id', 'from_time', 'reserved_time', 'is_open_time'];
 
     public function device(): BelongsTo
     {

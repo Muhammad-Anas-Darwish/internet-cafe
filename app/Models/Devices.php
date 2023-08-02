@@ -15,11 +15,13 @@ class Devices extends Model
     protected $with = ['device_type'];
     protected $appends = ['status'];
 
+    protected $fillable = ['device_type_id', 'number', 'is_active'];
+
     public function device_type(): BelongsTo
     {
         return $this->belongsTo(DevicesTypes::class);
     }
-    
+
     public function customer(): Customers | Null
     {
         return Customers::where('device_id', $this->number)->first();

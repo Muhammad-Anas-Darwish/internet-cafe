@@ -1,14 +1,14 @@
-{{--
-    null
---}}
-
 <x-layout>
     <div class="full-container">
         <div class="sidebar">
-            @foreach ($devices as $device)
+            @php
+                $sidebar_devices = $devices->filter(function ($item) {
+                    return $item->status['status'] !== 'time';
+                });
+            @endphp
+            @foreach ($sidebar_devices as $device)
             <div color="{{$device->status['bg-trans']}}" id="device-{{$device->number}}" class="device">
                 <h3 class="title">{{$device->device_type->name}} <span class="{{$device->status['bg']}}">{{$device->number}}</span></h3>
-                {{-- <h3 status="{{$device->status['status']}}" class="time">@if (!is_null($device->customer()->remaining_time)) {{ substr($device->customer()->remaining_time, 0, 5) }} @endif </h3> --}}
                 <h3 status="{{$device->status['status']}}" class="time">{{$device->customer()->remaining_time ?? ''}}</h3>
             </div>
             @endforeach
@@ -17,7 +17,7 @@
         <div class="container content-container">
             @foreach ($devices as $device)
             <div color="{{$device->status['bg-trans']}}" id="device-{{$device->number}}" class="device"><span class="{{$device->status['bg']}}">{{$device->number}}</span>
-                <img src="images/ps-4.png">
+                <img src="{{ $device->device_type->image_url }}">
             </div>
             @endforeach
         </div>
@@ -240,13 +240,13 @@
                     <button class="exit"><i class="fas fa-times"></i></button>
                     <div class="up">
                         <div>
-                            <h3>{{$device->device_type->name}} device $device->number</h3>
+                            <h3>{{$device->device_type->name}} device {{$device->number}}</h3>
                             <form action="{{ route('customers.create') }}" method="post" class="one-line-form">
                                 @csrf
                                 <input type="hidden" name="device_id" value="{{ $device->number }}">
 
                                 <label for="time">Time: </label>
-                                <input name="reserved_time" pattern="(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]" id="time" class="simple-input" type="text" required>
+                                <input name="reserved_time" pattern="([0-1][0-9]|[0-9]|1[0-9]|2[0-3]):[0-5][0-9]" id="time" class="simple-input" type="text" value="01:00" required>
                                 <label for="is-open-time">Is open time: </label>
                                 <input id="is-open-time" class="simple-input" type="checkbox" name="is_open_time">
                                 <input type="submit" value=">">
